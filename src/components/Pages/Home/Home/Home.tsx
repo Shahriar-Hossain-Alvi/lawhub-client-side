@@ -1,9 +1,9 @@
-
+import Banner from "../Banner/Banner.jsx"
 
 const Home = () => {
     return (
         <div>
-            <h2>Welcome to the Typescript Project</h2>
+            <Banner />
         </div>
     );
 };
