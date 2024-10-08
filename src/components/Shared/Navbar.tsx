@@ -47,7 +47,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn bg-lawHub-primary text-white border-lawHub-primary font-poppins text-lg font-medium hover:text-lawHub-primary hover:bg-lawHub-heading">Free Consultation</a>
+                <a className="btn bg-lawHub-primary text-white border-lawHub-primary font-poppins text-lg font-medium hover:text-lawHub-primary hover:bg-lawHub-heading hover:border-lawHub-primary">Free Consultation</a>
             </div>
         </div>
     );
