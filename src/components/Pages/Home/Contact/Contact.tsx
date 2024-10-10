@@ -13,14 +13,14 @@ const Contact = () => {
 
                 <div className='grid grid-cols-2'>
                     <div className="bg-[#F3F3F3] text-center py-10 border-r border-b border-[#CFCFCF]">
-                        <CiLocationOn className='mb-4 mx-auto text-lawHub-primary w-10 h-10' />
+                        <CiLocationOn className='mb-4 mx-auto text-lawHub-primary text-4xl' />
                         <h1 className='font-eb-garamond text-2xl text-lawHub-heading font-extrabold mb-4'>Address</h1>
                         <p className='text-lawHub-secondary'>A108 Adam Street, <br />
                             New York, NY 535022</p>
                     </div>
 
                     <div className="bg-[#F3F3F3] text-center py-10 border-b border-[#CFCFCF]">
-                        <IoCallOutline className='mb-4 mx-auto text-lawHub-primary w-10 h-10' />
+                        <IoCallOutline className='mb-4 mx-auto text-lawHub-primary text-4xl' />
                         <h1 className='font-eb-garamond text-2xl text-lawHub-heading font-extrabold mb-4'>Call Us</h1>
                         <p className='text-lawHub-secondary'>+88 01750 00 00 00 <br />
                             +88 01750 00 00 00</p>
@@ -29,7 +29,7 @@ const Contact = () => {
 
 
                     <div className="bg-[#F3F3F3] text-center py-10 border-r border-[#CFCFCF]">
-                        <MdOutlineMail className='mb-4 mx-auto text-lawHub-primary w-10 h-10' />
+                        <MdOutlineMail className='mb-4 mx-auto text-lawHub-primary text-4xl' />
                         <h1 className='font-eb-garamond text-2xl text-lawHub-heading font-extrabold mb-4'>Email Us</h1>
                         <p className='text-lawHub-secondary'>info@gmail.com <br />
                             info@gmail.com</p>
@@ -37,7 +37,7 @@ const Contact = () => {
 
 
                     <div className="bg-[#F3F3F3] text-center py-10">
-                        <CiClock2 className='mb-4 mx-auto text-lawHub-primary w-10 h-10' />
+                        <CiClock2 className='mb-4 mx-auto text-lawHub-primary text-4xl' />
                         <h1 className='font-eb-garamond text-2xl text-lawHub-heading font-extrabold mb-4'>Working Hours</h1>
                         <p className='text-lawHub-secondary'>inMon-Fri: 9AM to 5PM <br />
                             Sunday: 9AM to 1 PM</p>

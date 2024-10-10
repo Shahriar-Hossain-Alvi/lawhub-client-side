@@ -5,7 +5,7 @@ const Faq = () => {
 
 
     return (
-        <div>
+        <div className="mb-28">
             <SectionHeading heading="Frequently Asked Any Questions" description="Find quick answers to common questions about our services, legal processes, and how we can assist you. This section helps clarify important details to guide you through your legal journey." />
 
 
