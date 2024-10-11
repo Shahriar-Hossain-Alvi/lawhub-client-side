@@ -13,7 +13,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar">
+        <div className="navbar z-50 relative">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -38,8 +38,8 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Link to="/" className="flex rounded-full items-center justify-between gap-1 pr-3">
-                    <img className="w-16 h-16 bg-black rounded-full" src={navbarLogo} alt="navbar logo" />
-                    <span className="font-bold text-3xl font-eb-garamond">Law Hub</span>
+                    <img className="w-8 h-8 md:w-16 md:h-16 bg-black rounded-full" src={navbarLogo} alt="navbar logo" />
+                    <span className="font-bold text-lg md:text-3xl font-eb-garamond">Law Hub</span>
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -48,7 +48,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn bg-lawHub-primary text-white border-lawHub-primary font-poppins text-lg font-medium hover:text-lawHub-primary hover:bg-lawHub-heading hover:border-lawHub-primary">Free Consultation</a>
+                <a className="btn btn-sm md:btn-md bg-lawHub-primary text-white border-lawHub-primary font-poppins text-lg font-medium hover:text-lawHub-primary hover:bg-lawHub-heading hover:border-lawHub-primary">Free Consultation</a>
             </div>
         </div>
     );

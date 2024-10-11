@@ -20,7 +20,8 @@ export default {
     },
   },
   plugins: [
-    daisyui
+    daisyui,
+    require('tailwind-scrollbar')
   ],
 }
 

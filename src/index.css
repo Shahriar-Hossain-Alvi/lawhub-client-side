@@ -6,8 +6,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* custom css */
+
 #menu-lg a.active{
     color: #B68C5A;
     background-color: transparent;
@@ -39,3 +39,4 @@
     padding-right: 5px;
     transition: all ease-in-out 0.3s;
 }
+
