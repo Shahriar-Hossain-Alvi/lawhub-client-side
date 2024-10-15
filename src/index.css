@@ -1,41 +1,43 @@
 /* google fonts */
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
+
 /* tailwind css config */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+/* scrollbar css */
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: #414040;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #B68C5A;
+    border-radius: 10px;
+}
+
+
 /* custom css */
 
-#menu-lg a.active{
+#navbar-cta a.active{
     color: #B68C5A;
     background-color: transparent;
     font-weight: 600;
 }
 
-#menu-lg a:hover{
+#navbar-cta a:hover{
     color: #B68C5A;
     background-color: transparent;
 }
 
-#menu-lg a:hover > span{
-    padding-right: 5px;
-    transition: all ease-in-out 0.3s;
-}
-
-#menu-sm a.active{
-    color: #B68C5A;
-    background-color: transparent;
-    font-weight: 600;
-}
-
-#menu-sm a:hover{
-    color: #B68C5A;
-    background-color: transparent;
-}
-
-#menu-sm a:hover > span{
+#navbar-cta a:hover > span{
     padding-right: 5px;
     transition: all ease-in-out 0.3s;
 }

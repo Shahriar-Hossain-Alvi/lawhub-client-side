@@ -1,56 +1,95 @@
+import logo from "../../assets/images/logo3.png";
+import { useEffect } from 'react';
+import { Collapse } from 'flowbite';
+import type { CollapseOptions, CollapseInterface } from 'flowbite';
+import { MdContactPhone, MdOutlineDesignServices, MdOutlineMenuOpen } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
-import navbarLogo from "../../assets/images/logo1.png";
-import { FaAngleRight } from "react-icons/fa6";
+import { FaBlog } from "react-icons/fa6";
+import { FaHome } from "react-icons/fa";
+import { IoBriefcaseSharp } from "react-icons/io5";
 
 const Navbar = () => {
+    useEffect(() => {
+        // Get the target element (the navbar menu)
+        const $targetEl: HTMLElement | null = document.getElementById('navbar-cta');
 
-    const navLinks = <>
-        <li><NavLink to="/"><span>Home</span> <FaAngleRight /></NavLink></li>
-        <li><NavLink to="/service"><span>Service</span> <FaAngleRight /></NavLink></li>
-        <li><NavLink to="/cases"><span>Cases</span> <FaAngleRight /></NavLink></li>
-        <li><NavLink to="/blog"><span>Blog</span> <FaAngleRight /></NavLink></li>
-        <li><NavLink to="/contact"><span>Contact Us</span> <FaAngleRight /></NavLink></li>
-    </>
+        // Get the trigger element (the button)
+        const $triggerEl: HTMLElement | null = document.querySelector('[data-collapse-toggle="navbar-cta"]');
+
+        let collapse: CollapseInterface | undefined;
+
+        if ($targetEl && $triggerEl) {
+            // Collapse options (optional)
+            const options: CollapseOptions = {
+                onCollapse: () => console.log('Navbar has been collapsed'),
+                onExpand: () => console.log('Navbar has been expanded'),
+                onToggle: () => console.log('Navbar has been toggled'),
+            };
+
+            // Initialize the collapse functionality
+            collapse = new Collapse($targetEl, $triggerEl, options);
+        }
+
+        // Cleanup function to avoid memory leaks
+        return () => {
+            if (collapse) {
+                collapse = undefined;
+            }
+        };
+    }, []);
+
 
     return (
-        <div className="navbar z-50 relative">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            color="#B68C5A"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
-                    </div>
-                    <ul id="menu-sm"
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        {navLinks}
+        <nav className="bg-white">
+            <div className="w-full flex flex-wrap items-center justify-between mx-auto py-1">
+                <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src={logo} className="h-16 w-16" alt="Flowbite Logo" />
+                    <span className="text-4xl font-extrabold text-lawHub-heading font-eb-garamond">Law Hub</span>
+                </Link>
+
+                <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <button type="button" className="text-white bg-lawHub-primary hover:bg-lawHub-heading focus:ring-4 focus:outline-none focus:ring-lawHub-primary font-semibold rounded-lg text-sm md:text-lg px-4 py-2">Free Consultation</button>
+
+
+                    <button data-collapse-toggle="navbar-cta" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
+                        <span className="sr-only">Open main menu</span>
+                        <MdOutlineMenuOpen className="text-2xl text-lawHub-heading" />
+                    </button>
+                </div>
+
+
+                <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <li>
+                            <NavLink to="/" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                            <FaHome className="inline" /> Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/services" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                            <MdOutlineDesignServices className="inline" /> Services
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/cases" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                            <IoBriefcaseSharp className="inline" /> Cases
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/blog" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                            <FaBlog className="inline" /> Blog
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/contact" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                            <MdContactPhone className="inline" /> Contact Us
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
-                <Link to="/" className="flex rounded-full items-center justify-between gap-1 pr-3">
-                    <img className="w-8 h-8 md:w-16 md:h-16 bg-black rounded-full" src={navbarLogo} alt="navbar logo" />
-                    <span className="font-bold text-lg md:text-3xl font-eb-garamond">Law Hub</span>
-                </Link>
             </div>
-            <div className="navbar-center hidden lg:flex">
-                <ul id="menu-lg" className="menu menu-horizontal px-1 text-[#707070] font-poppins">
-                    {navLinks}
-                </ul>
-            </div>
-            <div className="navbar-end">
-                <a className="btn btn-sm md:btn-md bg-lawHub-primary text-white border-lawHub-primary font-poppins text-lg font-medium hover:text-lawHub-primary hover:bg-lawHub-heading hover:border-lawHub-primary">Free Consultation</a>
-            </div>
-        </div>
+        </nav>
+
     );
 };
 
