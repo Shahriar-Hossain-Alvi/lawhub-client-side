@@ -14,13 +14,16 @@ const Banner = () => {
                     <p className='font-poppins text-[#E7E7E7] pt-6 pb-8'>We offer personalized legal advice to help you navigate complex situations with confidence</p>
                 </div>
 
-                <div className='font-poppins text-center flex flex-col md:flex-row justify-center'>
-                    <input className='input input-bordered text-lawHub-heading input-sm md:input-lg md:mr-6' type="text" placeholder='Search your services' />
-
-                    <button className='btn btn-sm md:btn-lg bg-lawHub-primary text-white border-lawHub-primary hover:bg-lawHub-heading hover:border-lawHub-primary hover:text-lawHub-primary'>Search</button>
-                </div>
+                <form className="flex items-center max-w-lg mx-auto">
+                    <div className="relative w-full">
+                        <input type="text" id="simple-search" className="text-lawHub-secondary  rounded-lg focus:ring-lawHub-primary focus:border-lawHub-primary block w-full pl-5 py-4" placeholder="Search your services" required />
+                    </div>
+                    <button type="submit" className="py-3 px-10 ms-2 text-xl text-white font-medium bg-lawHub-primary rounded-lg border border-lawHub-primary hover:bg-lawHub-heading focus:ring-4 focus:outline-none focus:ring-lawHub-primary">
+                        Search
+                        <span className="sr-only">Search</span>
+                    </button>
+                </form>
             </div>
-
         </div>
     );
 };
