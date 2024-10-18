@@ -4,6 +4,7 @@ import { GiHandcuffs, GiPrisoner } from "react-icons/gi";
 import { TbGavel } from "react-icons/tb";
 import { GoLaw } from "react-icons/go";
 import { BsFileText, BsHeartbreak } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 
 const PracticeAreas = () => {
@@ -19,7 +20,12 @@ const PracticeAreas = () => {
                     <h1 className="font-eb-garamond text-3xl font-extrabold mb-6">Business Law</h1>
                     <p className="text-lawHub-secondary mb-8">Business Law encompasses a variety of legal practices that govern commercial transactions and business operations. Our expert attorneys provide guidance on contracts, compliance, intellectual property, and dispute resolution, ensuring your business thrives while adhering to legal standards.</p>
 
-                    <button className="btn btn-circle bg-lawHub-primary text-white text-3xl hover:bg-lawHub-heading hover:text-lawHub-primary"><FaArrowRight /></button>
+                    <Link to="#">
+                        <button type="button" className="bg-lawHub-primary text-white text-2xl hover:bg-lawHub-heading hover:text-lawHub-primary rounded-full p-2.5 text-center inline-flex items-center">
+                            <FaArrowRight />
+                            <span className="sr-only">Icon description</span>
+                        </button>
+                    </Link>
                 </div>
 
 
@@ -29,7 +35,12 @@ const PracticeAreas = () => {
                     <h1 className="font-eb-garamond text-3xl font-extrabold mb-6">Criminal Law</h1>
                     <p className="text-lawHub-secondary mb-8">Criminal Law encompasses legal representation for individuals accused of crimes, ranging from misdemeanors to serious felonies. Our experienced defense attorneys work diligently to protect your rights, crafting strong defense strategies and navigating the complexities of the criminal justice system to achieve the best possible outcomes.</p>
 
-                    <button className="btn btn-circle bg-lawHub-primary text-white text-3xl hover:bg-lawHub-heading hover:text-lawHub-primary"><FaArrowRight /></button>
+                    <Link to="#">
+                        <button type="button" className="bg-lawHub-primary text-white text-2xl hover:bg-lawHub-heading hover:text-lawHub-primary rounded-full p-2.5 text-center inline-flex items-center">
+                            <FaArrowRight />
+                            <span className="sr-only">Icon description</span>
+                        </button>
+                    </Link>
                 </div>
 
 
@@ -39,7 +50,12 @@ const PracticeAreas = () => {
                     <h1 className="font-eb-garamond text-3xl font-extrabold mb-6">Child Support</h1>
                     <p className="text-lawHub-secondary mb-8">Child Support law focuses on ensuring the financial well-being of children after separation or divorce. We provide guidance in calculating support obligations, modifying agreements, and enforcing payments, advocating for the best interests of the child and ensuring fair contributions from both parents.</p>
 
-                    <button className="btn btn-circle bg-lawHub-primary text-white text-3xl hover:bg-lawHub-heading hover:text-lawHub-primary"><FaArrowRight /></button>
+                    <Link to="#">
+                        <button type="button" className="bg-lawHub-primary text-white text-2xl hover:bg-lawHub-heading hover:text-lawHub-primary rounded-full p-2.5 text-center inline-flex items-center">
+                            <FaArrowRight />
+                            <span className="sr-only">Icon description</span>
+                        </button>
+                    </Link>
                 </div>
 
 
@@ -49,7 +65,12 @@ const PracticeAreas = () => {
                     <h1 className="font-eb-garamond text-3xl font-extrabold mb-6">Education Law</h1>
                     <p className="text-lawHub-secondary mb-8">Education Law covers the legal rights and responsibilities of students, educators, and educational institutions. We assist with issues such as special education rights, discrimination, and policy compliance, ensuring that every student receives the quality education they deserve.</p>
 
-                    <button className="btn btn-circle bg-lawHub-primary text-white text-3xl hover:bg-lawHub-heading hover:text-lawHub-primary"><FaArrowRight /></button>
+                    <Link to="#">
+                        <button type="button" className="bg-lawHub-primary text-white text-2xl hover:bg-lawHub-heading hover:text-lawHub-primary rounded-full p-2.5 text-center inline-flex items-center">
+                            <FaArrowRight />
+                            <span className="sr-only">Icon description</span>
+                        </button>
+                    </Link>
                 </div>
 
 
@@ -59,7 +80,12 @@ const PracticeAreas = () => {
                     <h1 className="font-eb-garamond text-3xl font-extrabold mb-6">Divorce Law</h1>
                     <p className="text-lawHub-secondary mb-8">Divorce Law focuses on the legal dissolution of marriage, addressing matters such as asset division, alimony, and child custody. Our compassionate attorneys provide personalized support and strategies to navigate this challenging process, ensuring fair outcomes for all parties involved.</p>
 
-                    <button className="btn btn-circle bg-lawHub-primary text-white text-3xl hover:bg-lawHub-heading hover:text-lawHub-primary"><FaArrowRight /></button>
+                    <Link to="#">
+                        <button type="button" className="bg-lawHub-primary text-white text-2xl hover:bg-lawHub-heading hover:text-lawHub-primary rounded-full p-2.5 text-center inline-flex items-center">
+                            <FaArrowRight />
+                            <span className="sr-only">Icon description</span>
+                        </button>
+                    </Link>
                 </div>
 
 
@@ -69,7 +95,12 @@ const PracticeAreas = () => {
                     <h1 className="font-eb-garamond text-3xl font-extrabold mb-6">Tax Law</h1>
                     <p className="text-lawHub-secondary mb-8">Tax Law involves the regulations governing taxation and financial reporting. Our knowledgeable attorneys offer expert advice on compliance, tax planning, and dispute resolution with tax authorities, helping individuals and businesses minimize liabilities and avoid legal pitfalls.</p>
 
-                    <button className="btn btn-circle bg-lawHub-primary text-white text-3xl hover:bg-lawHub-heading hover:text-lawHub-primary"><FaArrowRight /></button>
+                    <Link to="#">
+                        <button type="button" className="bg-lawHub-primary text-white text-2xl hover:bg-lawHub-heading hover:text-lawHub-primary rounded-full p-2.5 text-center inline-flex items-center">
+                            <FaArrowRight />
+                            <span className="sr-only">Icon description</span>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>
