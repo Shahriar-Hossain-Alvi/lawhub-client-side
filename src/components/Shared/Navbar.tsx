@@ -53,35 +53,35 @@ const Navbar = () => {
 
                     <button data-collapse-toggle="navbar-cta" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
                         <span className="sr-only">Open main menu</span>
-                        <MdOutlineMenuOpen className="text-2xl text-lawHub-heading" />
+                        <MdOutlineMenuOpen className="text-2xl  text-lawHub-primary hover:text-lawHub-heading" />
                     </button>
                 </div>
 
 
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                        <li>
-                            <NavLink to="/" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                    <ul className="space-y-1 md:space-y-0 flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <li className="border-y md:border-y-0">
+                            <NavLink to="/" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
                             <FaHome className="inline" /> Home
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/services" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                        <li className="border-y md:border-y-0">
+                            <NavLink to="/services" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
                             <MdOutlineDesignServices className="inline" /> Services
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/cases" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                        <li className="border-y md:border-y-0">
+                            <NavLink to="/cases" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
                             <IoBriefcaseSharp className="inline" /> Cases
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/blog" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                        <li className="border-y md:border-y-0">
+                            <NavLink to="/blog" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
                             <FaBlog className="inline" /> Blog
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/contact" className="block py-2 px-3 md:p-0 text-white bg-lawHub-primary md:bg-transparent">
+                        <li className="border-y md:border-y-0">
+                            <NavLink to="/contact" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
                             <MdContactPhone className="inline" /> Contact Us
                             </NavLink>
                         </li>
