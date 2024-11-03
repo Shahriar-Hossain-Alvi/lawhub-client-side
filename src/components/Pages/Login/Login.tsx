@@ -1,20 +1,13 @@
 import { useState } from "react";
-import { FaEye, FaEyeSlash, FaFacebook, FaUserPen } from "react-icons/fa6";
+import { FaEye, FaEyeSlash, FaUserPen } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
 
-type Inputs = {
-    example: string,
-    exampleRequired: string,
-};
 
 const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
 
 
     return (
@@ -25,7 +18,7 @@ const Login = () => {
                 <div className="space-y-1 text-center">
                     <h1 className="border-b border-l border-lawHub-secondary  text-sm inline-block px-1 text-lawHub-heading">LOGIN DETAILS <FaUserPen className="inline pb-1" /></h1>
 
-                    <h2 className="text-2xl font-eb-garamond font-semibold">Create Your Account</h2>
+                    <h2 className="text-2xl font-eb-garamond font-semibold">Log in to your account</h2>
                 </div>
 
 
