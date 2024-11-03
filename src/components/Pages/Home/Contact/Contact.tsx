@@ -5,7 +5,7 @@ import { MdOutlineMail } from 'react-icons/md';
 
 const Contact = () => {
     return (
-        <div className='mb-28'>
+        <div className='mb-28 px-2'>
             <SectionHeading heading='Contact With Us' description="Have any questions or need assistance? Reach out to our team! We're here to provide guidance and support. Contact us through the form below, and we'll respond to your inquiries promptly." />
 
 
@@ -45,34 +45,25 @@ const Contact = () => {
                 </div>
 
 
-
-
-
                 <div className='flex items-center'>
                     <form className="w-full space-y-7">
-                        <div className="form-control">
-                            <input type="text" placeholder="Your Name" className="input input-bordered" required />
-                        </div>
+
+                        <input type="text" placeholder="Your Name" className="w-full" required />
 
 
-                        <div className="form-control">
-                            <input type="email" placeholder="Your email" className="input input-bordered" required />
-                        </div>
+                        <input type="email" placeholder="Your email" className="w-full" required />
 
 
-                        <div className="form-control">
-                            <input type="text" placeholder="Subject" className="input input-bordered" required />
-                        </div>
+                        <input type="text" placeholder="Subject" className="w-full" required />
 
-                        <div className='form-control'>
-                            <textarea
-                                placeholder="Your Message"
-                                className="textarea textarea-bordered textarea-lg w-full"></textarea>
-                        </div>
+                        <textarea
+                            placeholder="Your Message"
+                            className="textarea textarea-bordered textarea-lg w-full">
+                        </textarea>
 
 
                         <div className="form-control mt-6">
-                            <button className="btn bg-lawHub-primary text-white border-lawHub-primary hover:bg-lawHub-heading hover:text-lawHub-primary hover:border-lawHub-primary">Send Message</button>
+                            <button className="py-5 w-full rounded-lg bg-lawHub-primary text-white border-lawHub-primary hover:bg-lawHub-heading hover:text-lawHub-primary hover:border-lawHub-primary">Send Message</button>
                         </div>
                     </form>
                 </div>
