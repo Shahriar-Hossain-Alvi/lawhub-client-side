@@ -7,8 +7,13 @@ import { Link, NavLink } from "react-router-dom";
 import { FaBlog } from "react-icons/fa6";
 import { FaHome } from "react-icons/fa";
 import { IoBriefcaseSharp } from "react-icons/io5";
+import { FiLogIn } from "react-icons/fi";
 
 const Navbar = () => {
+
+
+
+    // For Menu Icon Functionality
     useEffect(() => {
         // Get the target element (the navbar menu)
         const $targetEl: HTMLElement | null = document.getElementById('navbar-cta');
@@ -59,30 +64,35 @@ const Navbar = () => {
 
 
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-                    <ul className="space-y-1 md:space-y-0 flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <ul className="space-y-1 md:space-y-0 flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                         <li className="border-y md:border-y-0">
                             <NavLink to="/" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
-                            <FaHome className="inline" /> Home
+                                <FaHome className="inline" /> Home
                             </NavLink>
                         </li>
                         <li className="border-y md:border-y-0">
                             <NavLink to="/services" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
-                            <MdOutlineDesignServices className="inline" /> Services
+                                <MdOutlineDesignServices className="inline" /> Services
                             </NavLink>
                         </li>
                         <li className="border-y md:border-y-0">
                             <NavLink to="/cases" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
-                            <IoBriefcaseSharp className="inline" /> Cases
+                                <IoBriefcaseSharp className="inline" /> Cases
                             </NavLink>
                         </li>
                         <li className="border-y md:border-y-0">
                             <NavLink to="/blog" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
-                            <FaBlog className="inline" /> Blog
+                                <FaBlog className="inline" /> Blog
                             </NavLink>
                         </li>
                         <li className="border-y md:border-y-0">
                             <NavLink to="/contact" className="block py-2 px-3 md:p-0 text-white md:text-lawHub-heading bg-lawHub-primary md:bg-transparent">
-                            <MdContactPhone className="inline" /> Contact Us
+                                <MdContactPhone className="inline" /> Contact Us
+                            </NavLink>
+                        </li>
+                        <li className="border-y md:border-y-0">
+                            <NavLink to="/login" className="block w-full mt-5 md:mt-0 py-2 px-3 md:p-0 text-white font-semibold md:text-lawHub-heading bg-lawHub-primary md:bg-transparent hover:text-lawHub-primary hover:bg-white">
+                            <FiLogIn className="inline" /> Login
                             </NavLink>
                         </li>
                     </ul>
