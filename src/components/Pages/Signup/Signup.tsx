@@ -1,10 +1,9 @@
 
 
+
 const Signup = () => {
     return (
-        <div>
-            
-        </div>
+        <div></div>
     );
 };
 
