@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash, FaUserPen } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import 'react-toastify/dist/ReactToastify.css';
+import useAuth from "../../Hooks/useAuth";
 
 
 interface FormInput {
@@ -14,14 +14,30 @@ interface FormInput {
     confirmPassword: string;
 }
 
+type UserInfo = Omit<FormInput, "confirmPassword">
+
 const Signup = () => {
+    const { user } = useAuth();
+    console.log(user);
+
+
+
     const [showPassword, setShowPassword] = useState(false);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormInput>();
 
 
     const onSignup: SubmitHandler<FormInput> = (data) => {
-        console.log(data);
+        const name = data.name;
+        const email = data.email;
+        const phoneNumber = data.phoneNumber;
+        const password = data.password;
+
+        const userInfo: UserInfo = { name, email, phoneNumber, password }
+
+        console.log(userInfo);
+
+
         reset();
     };
 
@@ -120,7 +136,7 @@ const Signup = () => {
                 </form>
 
                 <div className="text-center text-sm mt-3">
-                    Don't have an account? 
+                    Don't have an account?
                     <Link to="/signup" className="text-blue-600 hover:underline pl-1">
                         Create an account
                     </Link>
