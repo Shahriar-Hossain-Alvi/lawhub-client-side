@@ -1,17 +1,20 @@
 import logo from "../../assets/images/logo3.png";
 import { useEffect } from 'react';
 import { Collapse } from 'flowbite';
-import type { CollapseOptions, CollapseInterface } from 'flowbite';
+// import type { CollapseOptions, CollapseInterface } from 'flowbite';
+import type { CollapseInterface } from 'flowbite';
 import { MdContactPhone, MdOutlineDesignServices, MdOutlineMenuOpen } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
 import { FaBlog } from "react-icons/fa6";
 import { FaHome } from "react-icons/fa";
 import { IoBriefcaseSharp } from "react-icons/io5";
 import { FiLogIn } from "react-icons/fi";
+import useAuth from "../Hooks/useAuth";
+
 
 const Navbar = () => {
-
-
+    //    get auth providers data
+    const { user, logoutUser } = useAuth();
 
     // For Menu Icon Functionality
     useEffect(() => {
@@ -25,14 +28,15 @@ const Navbar = () => {
 
         if ($targetEl && $triggerEl) {
             // Collapse options (optional)
-            const options: CollapseOptions = {
-                onCollapse: () => console.log('Navbar has been collapsed'),
-                onExpand: () => console.log('Navbar has been expanded'),
-                onToggle: () => console.log('Navbar has been toggled'),
-            };
+            // const options: CollapseOptions = {
+            //     onCollapse: () => console.log('Navbar has been collapsed'),
+            //     onExpand: () => console.log('Navbar has been expanded'),
+            //     onToggle: () => console.log('Navbar has been toggled'),
+            // };
 
             // Initialize the collapse functionality
-            collapse = new Collapse($targetEl, $triggerEl, options);
+            collapse = new Collapse($targetEl, $triggerEl);
+            // collapse = new Collapse($targetEl, $triggerEl, options);
         }
 
         // Cleanup function to avoid memory leaks
@@ -42,6 +46,7 @@ const Navbar = () => {
             }
         };
     }, []);
+
 
 
     return (
@@ -91,9 +96,15 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li className="border-y md:border-y-0">
-                            <NavLink to="/login" className="block w-full mt-5 md:mt-0 py-2 px-3 md:p-0 text-white font-semibold md:text-lawHub-heading bg-lawHub-primary md:bg-transparent hover:text-lawHub-primary hover:bg-white">
-                            <FiLogIn className="inline" /> Login
-                            </NavLink>
+                            {user ?
+                                <button onClick={ ()=>{void logoutUser?.()}} className="block w-full mt-5 md:mt-0 py-2 px-3 md:p-0 text-white font-semibold md:text-lawHub-heading bg-lawHub-primary md:bg-transparent hover:text-lawHub-primary hover:bg-white">Logout</button>
+
+                                :
+                                <NavLink to="/login" className="block w-full mt-5 md:mt-0 py-2 px-3 md:p-0 text-white font-semibold md:text-lawHub-heading bg-lawHub-primary md:bg-transparent hover:text-lawHub-primary hover:bg-white">
+                                    <FiLogIn className="inline" /> Login
+                                </NavLink>
+                            }
+
                         </li>
                     </ul>
                 </div>

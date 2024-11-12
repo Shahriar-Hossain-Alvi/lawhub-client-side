@@ -1,15 +1,14 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { FaEye, FaEyeSlash, FaUserPen } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import { UserCredential } from "firebase/auth";
-import { AuthContext } from "../../Provider/AuthProvider";
-import { PiSpinnerGapDuotone } from "react-icons/pi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import useAuth from "../../Hooks/useAuth";
 
+
+// TODO: save user info in the DB
 
 interface FormInput {
     name: string;
@@ -28,24 +27,25 @@ interface CustomLocationState {
 
 
 const SignUp = () => {
-    const authContextData = useContext(AuthContext);
-    const user = authContextData?.user;
-    const createUser = authContextData?.createUser;
-    const updateUserName = authContextData?.updateUserName;
-    const loading = authContextData?.loading;
+    // get auth providers data
+    const { user, createUser, updateUserName, loading } = useAuth();
 
+    // get the current path of the user
     const navigate = useNavigate();
     const location = useLocation() as unknown as Location & { state: CustomLocationState };
-
     const from = location.state?.from?.pathname ?? "/";
 
-    const [showPassword, setShowPassword] = useState(false);
-    
 
+    // state for show and hide password
+    const [showPassword, setShowPassword] = useState(false);
+
+    // imports for react hoo form
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormInput>();
 
 
+    // sign up function
     const onSubmit: SubmitHandler<FormInput> = async (data) => {
+        // check if user is already logged in
         if (user) {
             await Swal.fire({
                 icon: "error",
@@ -59,6 +59,7 @@ const SignUp = () => {
             reset();
         }
 
+        // get the information from the user
         const name = data.name;
         const email = data.email;
         const phoneNumber = data.phoneNumber;
@@ -66,12 +67,12 @@ const SignUp = () => {
 
         const userInfo: UserInfo = { name, email, phoneNumber, password }
 
-        console.log(userInfo);
 
-
+        // Create new user
         await createUser?.(email, password)
             .then(result => {
                 if (result.user) {
+                    // update user name after account creation
                     updateUserName?.(name)
                         .then(() => {
                             void Swal.fire({
@@ -204,12 +205,14 @@ const SignUp = () => {
                     {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
 
 
-
+                    {/* Register button */}
                     <button type="submit" className="bg-lawHub-primary text-white py-2 rounded-full font-medium hover:bg-lawHub-heading transition-all ease-in-out duration-500">
-                       {loading ? <AiOutlineLoading3Quarters className="text-white text-lg  animate-spin mx-auto" /> : "Register"}
+                        {loading ? <AiOutlineLoading3Quarters className="text-white text-lg  animate-spin mx-auto" /> : "Register"}
                     </button>
                 </form>
 
+
+                        {/* Link to login page */}
                 <div className="text-center text-sm mt-3">
                     Already have an account?
                     <Link to="/signup" className="text-blue-600 hover:underline pl-1">

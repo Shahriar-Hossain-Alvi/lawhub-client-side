@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, UserCredential, User, updateProfile, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, UserCredential, User, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { app } from "../Firebase/firebase.config";
 
@@ -8,6 +8,7 @@ interface AuthContextType {
     createUser: (email: string, password: string) => Promise<UserCredential>;
     updateUserName: (name: string) => Promise<void>;
     loading: boolean;
+    logoutUser: () => Promise<void>;
 }
 
 
@@ -39,6 +40,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
 
+    // logout user
+    const logoutUser = () => {
+        return signOut(auth);
+    }
 
     // observer
     useEffect(() => {
@@ -64,7 +69,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         user,
         createUser,
         loading,
-        updateUserName
+        updateUserName,
+        logoutUser
     }
 
     return (

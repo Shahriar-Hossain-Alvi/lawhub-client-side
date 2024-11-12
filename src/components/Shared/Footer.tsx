@@ -51,7 +51,7 @@ const Footer = () => {
                     </div>
 
 
-                    <form className="mt-6">
+                    <div className="mt-6">
                         <h6 className="text-2xl font-extrabold font-eb-garamond text-white mb-12">Subscribe</h6>
 
                         <p className="mb-6 text-[#CFCFCF]">Subscribe for our latest & Articles. We Won't Give You Spam Mails
@@ -70,7 +70,7 @@ const Footer = () => {
                             </button>
                         </form>
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </footer>

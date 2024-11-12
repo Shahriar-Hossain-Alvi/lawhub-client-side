@@ -2,10 +2,14 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash, FaUserPen } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 
 const Login = () => {
+    // get auth providers data
+    const {user, loading} = useAuth();
 
+    // state for show and hide password
     const [showPassword, setShowPassword] = useState(false);
 
 
