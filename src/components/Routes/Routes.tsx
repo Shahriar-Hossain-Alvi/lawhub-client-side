@@ -4,7 +4,7 @@ import {
 import Main from "../Layouts/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
-import Signup from "../Pages/Signup/Signup";
+import SignUp from "../Pages/Signup/Signup";
 
 const router = createBrowserRouter([
     {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/signup",
-        element: <Signup />,
+        element: <SignUp />,
     }
 ]);
 

@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaUserPen } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { UserCredential } from "firebase/auth";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { PiSpinnerGapDuotone } from "react-icons/pi";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 
 interface FormInput {
@@ -14,20 +19,46 @@ interface FormInput {
     confirmPassword: string;
 }
 
+
 type UserInfo = Omit<FormInput, "confirmPassword">
 
-const Signup = () => {
-    const { user } = useAuth();
-    console.log(user);
+interface CustomLocationState {
+    from?: { pathname: string };
+}
 
 
+const SignUp = () => {
+    const authContextData = useContext(AuthContext);
+    const user = authContextData?.user;
+    const createUser = authContextData?.createUser;
+    const updateUserName = authContextData?.updateUserName;
+    const loading = authContextData?.loading;
+
+    const navigate = useNavigate();
+    const location = useLocation() as unknown as Location & { state: CustomLocationState };
+
+    const from = location.state?.from?.pathname ?? "/";
 
     const [showPassword, setShowPassword] = useState(false);
+    
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormInput>();
 
 
-    const onSignup: SubmitHandler<FormInput> = (data) => {
+    const onSubmit: SubmitHandler<FormInput> = async (data) => {
+        if (user) {
+            await Swal.fire({
+                icon: "error",
+                title: "Already Logged in",
+            })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        navigate(from, { replace: true })
+                    }
+                })
+            reset();
+        }
+
         const name = data.name;
         const email = data.email;
         const phoneNumber = data.phoneNumber;
@@ -38,6 +69,29 @@ const Signup = () => {
         console.log(userInfo);
 
 
+        await createUser?.(email, password)
+            .then(result => {
+                if (result.user) {
+                    updateUserName?.(name)
+                        .then(() => {
+                            void Swal.fire({
+                                icon: "success",
+                                title: "Account Created",
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            setTimeout(() => {
+                                navigate(from, { replace: true })
+                            }, 1600)
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
         reset();
     };
 
@@ -75,7 +129,7 @@ const Signup = () => {
 
 
                 {/* Login form */}
-                <form onSubmit={handleSubmit(onSignup)} className="flex flex-col gap-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
 
                     {/* name */}
                     <input
@@ -113,32 +167,53 @@ const Signup = () => {
                     <div className="relative">
                         <input
                             className="w-full rounded-xl border-none focus:outline-none focus:ring-1 focus:ring-lawHub-primary"
-                            {...register("password", { required: true })}
+                            {...register("password", {
+                                required: "Password is Required", minLength: {
+                                    value: 8,
+                                    message: "Password must be at least 8 characters"
+                                }, maxLength: {
+                                    value: 30,
+                                    message: "Password must be within 30 characters"
+                                }
+                            })}
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter Your password"
                         />
-                        {errors.password && <span className="text-red-500">Enter a password</span>}
+                        {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+
 
                         <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2">{showPassword ? <FaEyeSlash /> : <FaEye />}</button>
                     </div>
 
+
+                    {/* confirm password */}
                     <input
                         className="w-full rounded-xl border-none focus:outline-none focus:ring-1 focus:ring-lawHub-primary"
-                        {...register("confirmPassword", { required: true })}
+                        {...register("confirmPassword", {
+                            required: "Please Confirm your password", minLength: {
+                                value: 8,
+                                message: "Password must be at least 8 characters"
+                            }, maxLength: {
+                                value: 30,
+                                message: "Password must be within 30 characters"
+                            }
+                        })}
                         type={showPassword ? "text" : "password"}
                         placeholder="Confirm Your password"
                     />
-                    {errors.confirmPassword && <span className="text-red-500">Confirm your password</span>}
+                    {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
+
+
 
                     <button type="submit" className="bg-lawHub-primary text-white py-2 rounded-full font-medium hover:bg-lawHub-heading transition-all ease-in-out duration-500">
-                        Log In
+                       {loading ? <AiOutlineLoading3Quarters className="text-white text-lg  animate-spin mx-auto" /> : "Register"}
                     </button>
                 </form>
 
                 <div className="text-center text-sm mt-3">
-                    Don't have an account?
+                    Already have an account?
                     <Link to="/signup" className="text-blue-600 hover:underline pl-1">
-                        Create an account
+                        Login
                     </Link>
                 </div>
             </div>
@@ -146,4 +221,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default SignUp;
