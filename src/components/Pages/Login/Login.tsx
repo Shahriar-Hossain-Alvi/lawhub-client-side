@@ -1,16 +1,86 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash, FaUserPen } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import Swal from "sweetalert2";
+
+
+interface FormInput {
+    email: string;
+    password: string;
+}
+
+
+interface CustomLocationState {
+    from?: { pathname: string };
+}
 
 
 const Login = () => {
     // get auth providers data
-    const {user, loading} = useAuth();
+    const { user, loading, loginUser, setLoading } = useAuth();
 
     // state for show and hide password
     const [showPassword, setShowPassword] = useState(false);
+
+    // get the current path of the user
+    const navigate = useNavigate();
+    const location = useLocation() as unknown as Location & { state: CustomLocationState };
+    const from = location.state?.from?.pathname ?? "/";
+
+
+
+
+    // imports for react hoo form
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormInput>();
+
+
+    // sign up function
+    const onSubmit: SubmitHandler<FormInput> = async (data) => {
+        // check if user is already logged in
+        if (user) {
+            await Swal.fire({
+                icon: "error",
+                title: "Already Logged in",
+            })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        navigate(from, { replace: true })
+                    }
+                })
+            reset();
+        }
+
+        // get the information from the user
+        const email = data.email;
+        const password = data.password;
+
+        await loginUser?.(email, password)
+            .then(result => {
+                if (result.user) {
+                    void Swal.fire({
+                        icon: "success",
+                        title: "Logged in successful",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setTimeout(() => {
+                        navigate(from, { replace: true })
+                    }, 1600)
+                }
+            })
+            .catch(() => {
+                void Swal.fire({
+                    icon: "error",
+                    text: "Error: Invalid Credentials",
+                })
+                setLoading?.(false);
+            })
+        reset();
+    }
 
 
 
@@ -47,29 +117,43 @@ const Login = () => {
 
 
                 {/* Login form */}
-                <form className="flex flex-col gap-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+                    {/* email */}
                     <input
                         className="w-full rounded-xl border-none focus:outline-none focus:ring-1 focus:ring-lawHub-primary"
-                        name="email"
+                        {...register("email", { required: true })}
                         type="email"
                         placeholder="Enter Your email address"
-                        required
                     />
+                    {errors.email && <span className="text-red-500">Fill up email field</span>}
 
 
                     <div className="relative">
                         <input
                             className="w-full rounded-xl border-none focus:outline-none focus:ring-1 focus:ring-lawHub-primary"
-                            name="password"
+                            {...register("password", {
+                                required: "Password is Required", minLength: {
+                                    value: 8,
+                                    message: "Password must be at least 8 characters"
+                                }, maxLength: {
+                                    value: 30,
+                                    message: "Password must be within 30 characters"
+                                }
+                            })}
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter Your password"
-                            required
                         />
-                        <button onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2">{showPassword ? <FaEyeSlash /> : <FaEye />}</button>
+                        {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+
+
+                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2">{showPassword ? <FaEyeSlash /> : <FaEye />}</button>
                     </div>
 
+
+
+                    {/* login button */}
                     <button type="submit" className="bg-lawHub-primary text-white py-2 rounded-full font-medium hover:bg-lawHub-heading transition-all ease-in-out duration-500">
-                        Log In
+                        {loading ? <AiOutlineLoading3Quarters className="text-white text-lg  animate-spin mx-auto" /> : "Login"}
                     </button>
                 </form>
 

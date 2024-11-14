@@ -1,13 +1,16 @@
-import { getAuth, createUserWithEmailAndPassword, UserCredential, User, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { getAuth, createUserWithEmailAndPassword, UserCredential, User, updateProfile, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { createContext, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { app } from "../Firebase/firebase.config";
+import { value } from "@material-tailwind/react/types/components/chip";
 
 
 interface AuthContextType {
     user: User | null;
     createUser: (email: string, password: string) => Promise<UserCredential>;
     updateUserName: (name: string) => Promise<void>;
+    loginUser: (email: string, password: string) => Promise<UserCredential>;
     loading: boolean;
+    setLoading: (value: boolean) => void;
     logoutUser: () => Promise<void>;
 }
 
@@ -29,6 +32,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // update the username
     const updateUserName = (name: string) => {
+        setLoading(true);
         if (auth.currentUser) {
             return updateProfile(auth.currentUser, {
                 displayName: name
@@ -37,6 +41,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         else {
             return Promise.reject(new Error("No authenticated user is found"))
         }
+    }
+
+
+    // login user
+    const loginUser = (email: string, password: string) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
 
@@ -58,9 +69,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setLoading(false);
             }
         });
-        return () => {
-            return unsubscribe();
-        }
+        return unsubscribe;
     }, [])
 
 
@@ -70,7 +79,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         createUser,
         loading,
         updateUserName,
-        logoutUser
+        logoutUser,
+        loginUser,
+        setLoading
     }
 
     return (
