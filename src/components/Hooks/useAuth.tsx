@@ -11,8 +11,9 @@ const useAuth = () => {
     const logoutUser = authContextData?.logoutUser;
     const loginUser = authContextData?.loginUser;
     const setLoading = authContextData?.setLoading;
+    const signInWithGoogle = authContextData?.signInWithGoogle;
 
-    return { user, createUser, updateUserName, loading, logoutUser, loginUser, setLoading }
+    return { user, createUser, updateUserName, loading, logoutUser, loginUser, setLoading, signInWithGoogle }
 };
 
 export default useAuth;

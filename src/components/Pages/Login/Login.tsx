@@ -13,7 +13,6 @@ interface FormInput {
     password: string;
 }
 
-
 interface CustomLocationState {
     from?: { pathname: string };
 }
@@ -21,7 +20,7 @@ interface CustomLocationState {
 
 const Login = () => {
     // get auth providers data
-    const { user, loading, loginUser, setLoading } = useAuth();
+    const { user, loading, loginUser, setLoading, signInWithGoogle } = useAuth();
 
     // state for show and hide password
     const [showPassword, setShowPassword] = useState(false);
@@ -63,7 +62,7 @@ const Login = () => {
                 if (result.user) {
                     void Swal.fire({
                         icon: "success",
-                        title: "Logged in successful",
+                        title: "Login successful",
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -83,6 +82,46 @@ const Login = () => {
     }
 
 
+    // google sign in
+    const handleGoogleSignIn = async () => {
+        // check if user is already logged in
+        if (user) {
+            await Swal.fire({
+                icon: "error",
+                title: "Already Logged in",
+            })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        navigate(from, { replace: true })
+                    }
+                })
+            return;
+        }
+
+        // sign in with google
+        await signInWithGoogle?.()
+            .then(result => {
+                if (result.user) {
+                    void Swal.fire({
+                        icon: "success",
+                        title: "Login successful",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setTimeout(() => {
+                        navigate(from, { replace: true })
+                    }, 1600)
+                }
+            })
+            .catch(() => {
+                void Swal.fire({
+                    icon: "error",
+                    text: "Error: Invalid Credentials",
+                })
+                setLoading?.(false);
+            })
+    }
+
 
     return (
         <div className="py-12 min-h-screen">
@@ -98,7 +137,8 @@ const Login = () => {
 
 
                 {/* google sign in */}
-                <button className="flex justify-center items-center gap-1 bg-white py-2 rounded-full text-lawHub-heading font-medium shadow-lg mt-4 w-full hover:bg-lawHub-heading hover:text-white transition-all ease-in-out duration-500">
+                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+                <button onClick={handleGoogleSignIn} className="flex justify-center items-center gap-1 bg-white py-2 rounded-full text-lawHub-heading font-medium shadow-lg mt-4 w-full hover:bg-lawHub-heading hover:text-white transition-all ease-in-out duration-500">
                     <FcGoogle className="text-xl" />
                     <p>Login with Google</p>
                 </button>
@@ -117,6 +157,7 @@ const Login = () => {
 
 
                 {/* Login form */}
+                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
                     {/* email */}
                     <input

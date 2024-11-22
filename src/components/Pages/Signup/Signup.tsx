@@ -28,7 +28,7 @@ interface CustomLocationState {
 
 const SignUp = () => {
     // get auth providers data
-    const { user, createUser, updateUserName, loading } = useAuth();
+    const { user, createUser, updateUserName, loading, signInWithGoogle, setLoading } = useAuth();
 
     // get the current path of the user
     const navigate = useNavigate();
@@ -97,6 +97,47 @@ const SignUp = () => {
     };
 
 
+    // google sign in
+    const handleGoogleSignIn = async () => {
+        // check if user is already logged in
+        if (user) {
+            await Swal.fire({
+                icon: "error",
+                title: "Already Logged in",
+            })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        navigate(from, { replace: true })
+                    }
+                })
+            return;
+        }
+
+        // sign in with google
+        await signInWithGoogle?.()
+            .then(result => {
+                if (result.user) {
+                    void Swal.fire({
+                        icon: "success",
+                        title: "Login successful",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setTimeout(() => {
+                        navigate(from, { replace: true })
+                    }, 1600)
+                }
+            })
+            .catch(() => {
+                void Swal.fire({
+                    icon: "error",
+                    text: "Error: Invalid Credentials",
+                })
+                setLoading?.(false);
+            })
+    }
+
+
     return (
         <div className="py-12 min-h-screen">
             <div className="mx-auto max-w-lg p-5 rounded-xl bg-[#ecede7]">
@@ -111,7 +152,8 @@ const SignUp = () => {
 
 
                 {/* google sign in */}
-                <button className="flex justify-center items-center gap-1 bg-white py-2 rounded-full text-lawHub-heading font-medium shadow-lg mt-4 w-full hover:bg-lawHub-heading hover:text-white transition-all ease-in-out duration-500">
+                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+                <button onClick={handleGoogleSignIn} className="flex justify-center items-center gap-1 bg-white py-2 rounded-full text-lawHub-heading font-medium shadow-lg mt-4 w-full hover:bg-lawHub-heading hover:text-white transition-all ease-in-out duration-500">
                     <FcGoogle className="text-xl" />
                     <p>Login with Google</p>
                 </button>
@@ -130,6 +172,7 @@ const SignUp = () => {
 
 
                 {/* Login form */}
+                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
 
                     {/* name */}
@@ -212,7 +255,7 @@ const SignUp = () => {
                 </form>
 
 
-                        {/* Link to login page */}
+                {/* Link to login page */}
                 <div className="text-center text-sm mt-3">
                     Already have an account?
                     <Link to="/signup" className="text-blue-600 hover:underline pl-1">

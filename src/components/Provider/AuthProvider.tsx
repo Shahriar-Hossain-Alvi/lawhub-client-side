@@ -1,7 +1,6 @@
-import { getAuth, createUserWithEmailAndPassword, UserCredential, User, updateProfile, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
-import { createContext, ReactNode, SetStateAction, useEffect, useState } from "react";
+import { getAuth, createUserWithEmailAndPassword, UserCredential, User, updateProfile, onAuthStateChanged, signOut, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { app } from "../Firebase/firebase.config";
-import { value } from "@material-tailwind/react/types/components/chip";
 
 
 interface AuthContextType {
@@ -12,10 +11,12 @@ interface AuthContextType {
     loading: boolean;
     setLoading: (value: boolean) => void;
     logoutUser: () => Promise<void>;
+    signInWithGoogle: () => Promise<UserCredential>;
 }
 
 
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -51,6 +52,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
 
+    // sign in with google
+    const signInWithGoogle = () => {
+        return signInWithPopup(auth, provider);
+    }
+
+
     // logout user
     const logoutUser = () => {
         return signOut(auth);
@@ -81,7 +88,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         updateUserName,
         logoutUser,
         loginUser,
-        setLoading
+        setLoading,
+        signInWithGoogle
     }
 
     return (
